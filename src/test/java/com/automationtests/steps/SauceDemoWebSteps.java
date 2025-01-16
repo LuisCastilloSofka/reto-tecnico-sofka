@@ -1,8 +1,6 @@
 package com.automationtests.steps;
 
-import com.automationtest.questions.CartSize;
-import com.automationtest.questions.ProductsSortedByPrice;
-import com.automationtest.questions.SelectedProductsInCart;
+import com.automationtest.questions.*;
 import com.automationtest.ui.*;
 import com.automationtest.tasks.*;
 import com.automationtest.utils.templates.EnvironmentConfig;
@@ -12,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Consequence;
+import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 import org.hamcrest.Matcher;
@@ -27,6 +26,7 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
 import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
 
@@ -124,6 +124,50 @@ public class SauceDemoWebSteps {
 
         Assert.assertTrue(updatedCartSize<initialCartSize);
     }
+
+    @Given("the user proceeds to checkout")
+    public void theUserProceedsToCheckout(){
+        when(theActorInTheSpotlight()).attemptsTo(
+                MakeLogin.withCredentials("standard_user","secret_sauce"),
+                AddToCart.productsByCriteria(),
+                Click.on(PageSauceCart.CHECKOUT_BUTTON)
+        );
+    }
+
+    @When("the user completes the checkout process with {string}, {string}, and {string}")
+    public void theUserCompletesTheCheckoutProcess(String firstName, String lastName, String postalCode) {
+        theActorInTheSpotlight().attemptsTo(
+                CompleteCheckoutForm.with(firstName, lastName, postalCode)
+        );
+    }
+
+    @Then("the total number of items in the cart should be {int}")
+    public void theTotalNumberOfItemsInTheCartShouldBe(int expectedItems) {
+        theActorInTheSpotlight().should(
+                seeThat("Total items in cart", TotalItemDisplayed.inTheCart(), equalTo(expectedItems))
+        );
+    }
+
+    @Then("the total with tax should be correct based on {double}")
+    public void theTotalWithTaxShouldBeCorrect(double expectedTotal) {
+        theActorInTheSpotlight().should(
+                seeThat("Total with tax is correct", TotalWithTax.is(expectedTotal))
+        );
+        theActorInTheSpotlight().attemptsTo(
+                Click.on(CheckoutPage.FINISH_BUTTON)
+        );
+    }
+
+    @Then("the success message should be visible")
+    public void theSuccessMessageShouldBeVisible() {
+        theActorInTheSpotlight().should(
+                seeThat("Success message is visible", SuccessMessageDisplayed.isVisible())
+        );
+    }
+
+
+
+
 
 
 }

@@ -14,3 +14,5 @@ public class PageSauceProducts {
     public static final Target ADD_TO_CART_BUTTONS = Target.the("Add to cart buttons").locatedBy(".inventory_item .btn_inventory");
     public static final Target CART_BUTTON = Target.the("Cart button").locatedBy(".shopping_cart_link");
 }
+
+
