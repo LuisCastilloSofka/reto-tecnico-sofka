@@ -1,6 +1,7 @@
 package com.automationtests.steps;
 
 import com.automationtest.questions.ProductsSortedByPrice;
+import com.automationtest.questions.SelectedProductsInCart;
 import com.automationtest.ui.*;
 import com.automationtest.tasks.*;
 import com.automationtest.utils.templates.EnvironmentConfig;
@@ -73,5 +74,20 @@ public class SauceDemoWebSteps {
                 seeThat(ProductsSortedByPrice.inAscendingOrder(), is(true))
         );
     }
+
+    @When("the user adds the products with the lowest, highest, and any price to the cart")
+    public void theUserAddsTheProductsToTheCart(){
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                AddToCart.productsByCriteria()
+        );
+    }
+
+    @Then("the selected products should be in the cart")
+    public void theSelectedProductsShouldBeInTheCart() {
+        List<String> expectedProducts = List.of("Sauce Labs Onesie", "Sauce Labs Fleece Jacket", "Sauce Labs Bike Light");
+        OnStage.theActorInTheSpotlight().should(
+                    seeThat(SelectedProductsInCart.are(expectedProducts), is(true))
+            );
+        }
 
 }
