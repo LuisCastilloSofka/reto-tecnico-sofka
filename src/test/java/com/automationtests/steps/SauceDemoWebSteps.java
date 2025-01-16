@@ -1,5 +1,6 @@
 package com.automationtests.steps;
 
+import com.automationtest.questions.CartSize;
 import com.automationtest.questions.ProductsSortedByPrice;
 import com.automationtest.questions.SelectedProductsInCart;
 import com.automationtest.ui.*;
@@ -10,8 +11,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Consequence;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
+import org.hamcrest.Matcher;
+import org.junit.Assert;
 
 import java.util.List;
 import java.util.Map;
@@ -19,16 +23,18 @@ import java.util.Map;
 import static com.automationtest.tasks.SortProducts.by;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.lessThan;
 
 
 public class SauceDemoWebSteps {
 
     EnvironmentConfig environmentConfig = new EnvironmentConfig();
 
+    private int initialCartSize;
 
     @Given("customer {actor} navigates to sauceDemo page")
     public void customerNavigatestoSauceDemoPage(Actor actor){
@@ -89,5 +95,35 @@ public class SauceDemoWebSteps {
                     seeThat(SelectedProductsInCart.are(expectedProducts), is(true))
             );
         }
+
+    @Given("the user has added products to the cart")
+    public void theUserHasAddedProductsToTheCart(){
+        when(theActorInTheSpotlight()).attemptsTo(
+                MakeLogin.withCredentials("standard_user","secret_sauce"),
+                AddToCart.productsByCriteria()
+        );
+
+        initialCartSize = OnStage.theActorInTheSpotlight().asksFor(
+                CartSize.totalItems(PageSauceCart.REMOVE_BUTTONS)
+        );
+    }
+
+    @When("the user removes a product from the cart")
+    public void theUserRemovesAProductFromTheCart(){
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                RemoveFromCart.anyProduct()
+        );
+    }
+
+    @Then("the product should no longer be in the cart")
+    public void theProductShouldNotLongerBeInTheCart(){
+
+        int updatedCartSize = OnStage.theActorInTheSpotlight().asksFor(
+                CartSize.totalItems(PageSauceCart.REMOVE_BUTTONS)
+        );
+
+        Assert.assertTrue(updatedCartSize<initialCartSize);
+    }
+
 
 }

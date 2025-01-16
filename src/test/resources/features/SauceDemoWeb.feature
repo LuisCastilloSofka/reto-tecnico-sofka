@@ -20,8 +20,13 @@ Feature: Test Scenarios for SauceDemo Application
     When the user sorts the products by "Price (low to high)"
     Then the products should be displayed in ascending order of price
 
-  @swagLabs
   Scenario: Add products based on price criteria
     Given the user is logged into Sauce Demo
     When the user adds the products with the lowest, highest, and any price to the cart
     Then the selected products should be in the cart
+
+  @swagLabs
+  Scenario: Remove one product from the cart
+    Given the user has added products to the cart
+    When the user removes a product from the cart
+    Then the product should no longer be in the cart

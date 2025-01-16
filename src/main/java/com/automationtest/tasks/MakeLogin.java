@@ -24,11 +24,11 @@ public class MakeLogin implements Task {
         return Tasks.instrumented(MakeLogin.class, user, pass);
     }
 
-    @Step("{0} inicia sesión:")
+    @Step("{0} Login:")
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Task.where("Ingresa las credenciales e inicia sesión",
+                Task.where("Enter your credentials and log in",
                         Enter.keyValues(this.user).into(INPUT_USERNAME),
                         Enter.keyValues(this.pass).into(INPUT_PASSWORD),
                         Click.on(BUTTON_LOGIN)
