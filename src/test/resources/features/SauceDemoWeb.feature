@@ -31,10 +31,20 @@ Feature: Test Scenarios for SauceDemo Application
     When the user removes a product from the cart
     Then the product should no longer be in the cart
 
-  @swagLabs
   Scenario: Complete the checkout process
     Given the user proceeds to checkout
     And the user completes the checkout process with "Estebanano", "Castillo", and "230050"
     Then the total number of items in the cart should be 3
     And the total with tax should be correct based on 67.97
     And the success message should be visible
+
+  @swagLabs
+  Scenario: Validate handling of incorrect product price
+    Given the user has added the following products to the cart:
+      | Sauce Labs Backpack     |
+      | Sauce Labs Bike Light   |
+      | Sauce Labs Bolt T-Shirt |
+    When the user completes the checkout process with "Jane", "Smith", and "54321"
+    Then the price of the most expensive product should match the expected price
+    #incorrect price
+      | Sauce Labs Backpack  | 45.00         |

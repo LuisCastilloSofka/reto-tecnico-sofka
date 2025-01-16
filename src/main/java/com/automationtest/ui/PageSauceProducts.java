@@ -13,6 +13,8 @@ public class PageSauceProducts {
     public static final Target PRODUCT_NAMES = Target.the("Product names").locatedBy(".inventory_item_name");
     public static final Target ADD_TO_CART_BUTTONS = Target.the("Add to cart buttons").locatedBy(".inventory_item .btn_inventory");
     public static final Target CART_BUTTON = Target.the("Cart button").locatedBy(".shopping_cart_link");
+    public static final Target ADD_TO_CART_BUTTON = Target.the("Add to cart button").locatedBy("//div[text()='{0}']/ancestor::div[@class='inventory_item']//button[contains(text(),'Add to cart')]");
+
 }
 
 

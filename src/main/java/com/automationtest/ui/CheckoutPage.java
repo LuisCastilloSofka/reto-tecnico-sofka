@@ -14,6 +14,10 @@ public class CheckoutPage {
     public static final Target TOTAL = Target.the("Total price").locatedBy(".summary_total_label");
     public static final Target SUCCESS_MESSAGE = Target.the("Success message").locatedBy(".complete-header");
     public static final Target FINISH_BUTTON = Target.the("Finish button").locatedBy("#finish");
+    public static final Target PRODUCT_NAMES = Target.the("Product names").locatedBy(".inventory_item_name");
+    public static final Target PRODUCT_PRICES = Target.the("Product prices").locatedBy(".inventory_item_price");
+
+
 
 
 

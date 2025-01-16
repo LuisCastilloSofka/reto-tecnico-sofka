@@ -165,6 +165,29 @@ public class SauceDemoWebSteps {
         );
     }
 
+    @Given("the user has added the following products to the cart:")
+    public void theUserHasAddedTheFollowingProductsToTheCart(List<String> productNames) {
+        theActorInTheSpotlight().attemptsTo(
+                MakeLogin.withCredentials("standard_user","secret_sauce"),
+                AddProducts.toCart(productNames)
+        );
+    }
+
+    @Then("the price of the most expensive product should match the expected price")
+    public void thePriceOfTheMostExpensiveProductShouldMatch(DataTable expectedPrices) {
+        Map<String, Double> expectedPriceMap = expectedPrices.asMap(String.class, Double.class);
+
+        theActorInTheSpotlight().should(
+                seeThat(
+                        "The price of the most expensive product",
+                        MostExpensiveProductPrice.matches(expectedPriceMap),
+                        equalTo(true)
+                )
+        );
+    }
+
+
+
 
 
 
