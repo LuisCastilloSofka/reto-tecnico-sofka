@@ -1,5 +1,6 @@
 package com.automationtests.steps;
 
+import com.automationtest.questions.ProductsSortedByPrice;
 import com.automationtest.ui.*;
 import com.automationtest.tasks.*;
 import com.automationtest.utils.templates.EnvironmentConfig;
@@ -9,15 +10,19 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.actors.OnStage;
 
 import java.util.List;
 import java.util.Map;
 
+import static com.automationtest.tasks.SortProducts.by;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isPresent;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
+import static org.hamcrest.CoreMatchers.is;
+
 
 public class SauceDemoWebSteps {
 
@@ -45,6 +50,27 @@ public class SauceDemoWebSteps {
     public void shouldLoginAndSeeAvailableProducts(){
         then(theActorInTheSpotlight()).should(
                 seeThat(the(PageSauceProducts.PRODUCT_TITLE),isVisible())
+        );
+    }
+
+    @When("the user sorts the products by {string}")
+    public void theUserSortsTheProductsBy(String sortOption){
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                by(sortOption)
+        );
+    }
+
+    @Given("the user is logged into Sauce Demo")
+    public void theUserIsLoggedIntoSauceDemo(){
+        when(theActorInTheSpotlight()).wasAbleTo(
+                MakeLogin.withCredentials("standard_user","secret_sauce")
+        );
+    }
+
+    @Then("the products should be displayed in ascending order of price")
+    public void theProductShouldBeDisplayedInAscendingOrderOfPrice(){
+        OnStage.theActorInTheSpotlight().should(
+                seeThat(ProductsSortedByPrice.inAscendingOrder(), is(true))
         );
     }
 
