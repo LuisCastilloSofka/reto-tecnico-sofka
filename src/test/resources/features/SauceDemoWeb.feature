@@ -5,9 +5,11 @@ Feature: Test Scenarios for SauceDemo Application
   Scenario Outline: Login with valid credentials, static data
     Given customer admin navigates to sauceDemo page
     When login with credentials
+    | user  | password   |
+    |<user> | <password> |
     Then should login and see available products
     Examples:
-    |user           |password    |
+    | user          | password   |
     | standard_user |secret_sauce|
 
   Scenario Outline:  Login with valid credentials
