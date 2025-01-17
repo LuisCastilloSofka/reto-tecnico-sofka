@@ -3,13 +3,15 @@ package com.automationtests.steps.api;
 import com.automationtest.questions.api.ResponseCode;
 import com.automationtest.questions.api.ValidResponseSchema;
 import com.automationtest.tasks.api.CreateBooking;
-import com.automationtest.tasks.api.CreateToken;
+import com.automationtest.tasks.api.GetBooking;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -45,5 +47,21 @@ public class RestfulBookerApiSteps {
                 seeThat("Response Schema", ValidResponseSchema.matches(schemaPath))
         );
     }
+
+    @Given("a booking exists with ID {int}")
+    public void aBookingExistsWithID(int id) {
+        // Opcional: puedes hacer un setup para asegurar que el booking existe
+    }
+
+    @Given("a booking does not exist with ID {int}")
+    public void aBookingDoesNotExistWithID(int id) {
+
+    }
+
+    @When("the user retrieves the booking with ID {int}")
+    public void theUserRetrievesTheBookingWithID(int id) {
+        theActorInTheSpotlight().attemptsTo(GetBooking.withId(id));
+    }
+
 
 }

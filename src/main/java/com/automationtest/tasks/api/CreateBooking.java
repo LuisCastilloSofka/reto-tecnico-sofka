@@ -23,6 +23,7 @@ public class CreateBooking implements Task {
         actor.attemptsTo(
                 Post.to("/booking")
                         .with(request -> request
+                                .log().all()
                                 .contentType("application/json")
                                 .body(bookingDetails))
         );

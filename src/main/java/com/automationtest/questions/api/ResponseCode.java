@@ -12,6 +12,7 @@ public class ResponseCode implements Question<Integer> {
 
     @Override
     public Integer answeredBy(Actor actor) {
+        SerenityRest.lastResponse().then().log().all();
         return SerenityRest.lastResponse().statusCode();
     }
 }
