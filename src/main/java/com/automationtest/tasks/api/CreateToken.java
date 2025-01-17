@@ -27,6 +27,7 @@ public class CreateToken implements Task {
                 Post.to("/auth")
                         .with(request -> request
                                 .contentType("application/json")
+                                .log().all()
                                 .body("{\"username\": \"" + username + "\", \"password\": \"" + password + "\"}")
                         )
         );

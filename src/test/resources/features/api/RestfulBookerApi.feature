@@ -21,7 +21,6 @@ Feature: Booking managment in Restful Booker Api
     Then the response code should be 200
     And the response schema should match "schemas/create_booking_schema.json"
 
-  @api
   Scenario: Get an existing booking
     When the user retrieves the booking with ID 1
     Then the response code should be 200
@@ -31,3 +30,16 @@ Feature: Booking managment in Restful Booker Api
     Given a booking does not exist with ID 99999
     When the user retrieves the booking with ID 99999
     Then the response code should be 404
+
+  @api
+  Scenario: Update an existing booking
+    Given the user is authenticated with username admin and password password123
+    When the user updates the booking with the following details:
+      | firstname | John  |
+      | lastname  | Doe   |
+      | totalprice| 150   |
+      | depositpaid| true |
+      | checkin   | 2023-02-01 |
+      | checkout  | 2023-02-10 |
+      | additionalneeds | Breakfast |
+    Then the response code should be 200
