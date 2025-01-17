@@ -1,8 +1,7 @@
-package com.automationtest.questions;
+package com.automationtest.questions.web;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import net.serenitybdd.screenplay.Task;
 import com.automationtest.ui.CheckoutPage;
 
 public class TotalItemDisplayed implements Question {

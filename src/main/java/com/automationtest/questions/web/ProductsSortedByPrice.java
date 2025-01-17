@@ -1,10 +1,9 @@
-package com.automationtest.questions;
+package com.automationtest.questions.web;
 
 import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 

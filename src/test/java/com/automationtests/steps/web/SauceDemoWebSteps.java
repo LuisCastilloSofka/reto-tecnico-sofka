@@ -1,25 +1,23 @@
-package com.automationtests.steps;
+package com.automationtests.steps.web;
 
-import com.automationtest.questions.*;
+import com.automationtest.questions.web.*;
+import com.automationtest.tasks.web.*;
 import com.automationtest.ui.*;
-import com.automationtest.tasks.*;
 import com.automationtest.utils.templates.EnvironmentConfig;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Consequence;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
-import org.hamcrest.Matcher;
 import org.junit.Assert;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.automationtest.tasks.SortProducts.by;
+import static com.automationtest.tasks.web.SortProducts.by;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -27,7 +25,6 @@ import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
 
 
 public class SauceDemoWebSteps {

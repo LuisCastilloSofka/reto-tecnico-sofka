@@ -1,4 +1,4 @@
-package com.automationtest.tasks;
+package com.automationtest.tasks.web;
 
 
 import net.serenitybdd.core.pages.WebElementFacade;

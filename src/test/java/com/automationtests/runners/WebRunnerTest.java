@@ -25,7 +25,7 @@ import static com.automationtest.utils.constants.Constants.EXT_FEATURE;
         glue = {"com.automationtests.hooks","com.automationtests.steps"},
         plugin = {"json:build/cucumber-reports/json/cucumber.json","summary"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        tags = "@swagLabs"
+        tags = "@api"
 )
 public class WebRunnerTest {
 

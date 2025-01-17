@@ -1,4 +1,4 @@
-package com.automationtest.tasks;
+package com.automationtest.tasks.web;
 
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.screenplay.Actor;

@@ -1,4 +1,4 @@
-package com.automationtest.tasks;
+package com.automationtest.tasks.web;
 
 import com.automationtest.ui.CheckoutPage;
 import net.serenitybdd.screenplay.Actor;

@@ -1,4 +1,4 @@
-package com.automationtest.tasks;
+package com.automationtest.tasks.web;
 
 import com.automationtest.ui.PageSauceCart;
 import com.automationtest.ui.PageSauceProducts;
@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.targets.Target;
 
 import java.util.List;
 
