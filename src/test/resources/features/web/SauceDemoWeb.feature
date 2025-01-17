@@ -1,10 +1,9 @@
-@web @agent3
+@web
 Feature: Test Scenarios for SauceDemo Application
 
   Background:
     Given customer admin navigates to sauceDemo page
 
-  @id:1  @login @swagLabsStaticData @smokeTest
   Scenario Outline: Login with valid credentials, static data
     When login with credentials
     | user  | password   |
@@ -13,7 +12,6 @@ Feature: Test Scenarios for SauceDemo Application
     Examples:
     | user          | password   |
     | standard_user |secret_sauce|
-
 
   Scenario: Sort products by price (low to high)
     Given the user is logged into Sauce Demo
@@ -24,7 +22,6 @@ Feature: Test Scenarios for SauceDemo Application
     Given the user is logged into Sauce Demo
     When the user adds the products with the lowest, highest, and any price to the cart
     Then the selected products should be in the cart
-
 
   Scenario: Remove one product from the cart
     Given the user has added products to the cart
@@ -38,7 +35,6 @@ Feature: Test Scenarios for SauceDemo Application
     And the total with tax should be correct based on 67.97
     And the success message should be visible
 
-  @swagLabs
   Scenario: Validate handling of incorrect product price
     Given the user has added the following products to the cart:
       | Sauce Labs Backpack     |

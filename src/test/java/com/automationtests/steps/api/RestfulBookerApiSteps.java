@@ -55,7 +55,7 @@ public class RestfulBookerApiSteps {
 
     @Given("a booking exists with ID {int}")
     public void aBookingExistsWithID(int id) {
-        // Opcional: puedes hacer un setup para asegurar que el booking existe
+
     }
 
     @Given("a booking does not exist with ID {int}")
@@ -77,10 +77,9 @@ public class RestfulBookerApiSteps {
 
     @When("the user updates the booking with the following details:")
     public void theUserUpdatesTheBookingWithTheFollowingDetails(DataTable table) {
-        // Obtener los detalles de la reserva desde el DataTable
+
         Map<String, String> bookingDetails = table.asMap(String.class, String.class);
 
-        // Llamar a la tarea UpdateBooking con los detalles
         theActorInTheSpotlight().attemptsTo(
                 UpdateBooking.withDetails(
                         "1",  // ID de la reserva

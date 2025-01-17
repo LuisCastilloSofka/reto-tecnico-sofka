@@ -1,3 +1,4 @@
+@api
 Feature: Booking managment in Restful Booker Api
 
   Background:
@@ -31,7 +32,6 @@ Feature: Booking managment in Restful Booker Api
     When the user retrieves the booking with ID 99999
     Then the response code should be 404
 
-  @api
   Scenario: Update an existing booking
     Given the user is authenticated with username admin and password password123
     When the user updates the booking with the following details:
